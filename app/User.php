@@ -52,4 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isBlocked() {
         return $this->status == false;
     }
+
+    public function todo() {
+        return $this->hasMany(Todo::class);
+    }
 }

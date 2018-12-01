@@ -83,7 +83,10 @@
                         <li><a class="waves-effect waves-dark" href="/" aria-expanded="false"><i class="fa fa-tachometer"></i><span
                                         class="hide-menu">خانه</span></a>
                         </li>
-                        <li><a class="waves-effect waves-dark" href="/user/task" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
+                        <li><a class="waves-effect waves-dark" href="/user/todoLists" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
+                                        class="hide-menu">لیست کارها</span></a>
+                        </li>
+                        <li><a class="waves-effect waves-dark" href="/user/tasks" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
                                         class="hide-menu">وظایف</span></a>
                         </li>
 

@@ -1,62 +1,112 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <link rel="stylesheet" href="{{asset('css/user.css')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('images/favicon.ico')}}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="UTF-8">
-    <script>
-
-    </script>
-    @yield('header')
-    <title>{{$title ?? 'پنل کاربری '}}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{"    " }}</title>
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('css/perfect-scrollbar.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/morris.css')}}" rel="stylesheet">
+    <link href="{{asset('css/c3.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/dashboard1.css')}}" rel="stylesheet">
+    <link href="{{asset('css/default.css')}}" id="theme" rel="stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.multiplecombobox.js"></script>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-    <div class="sk-folding-cube" v-cloak>
-        <div class="sk-cube1 sk-cube"></div>
-        <div class="sk-cube2 sk-cube"></div>
-        <div class="sk-cube4 sk-cube"></div>
-        <div class="sk-cube3 sk-cube"></div>
+<body class="fix-header fix-sidebar card-no-border">
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">پنل کاربری</p>
+        </div>
     </div>
-    <div id="user">
-        <user :nav="nav">
-            <template slot="header-short-link">
-                <b-nav-item href="{{route('user.home')}}" class="px-3">داشبورد</b-nav-item>
-            </template>
-            <template slot="header-left-short-link">
-                {{--<b-nav-item class="d-md-down-none">--}}
-                {{--<i class="icon-bell"></i>--}}
-                {{--<b-badge pill variant="danger">50</b-badge>--}}
-                {{--</b-nav-item>--}}
-            </template>
-            <template slot="header-user-dropdown">
-                <img src="{{auth('user')->user()->avatar ? '/storage/images/avatars/'.auth('user')->user()->avatar : '/storage/images/avatar.png'}}"
-                     class="img-avatar"
-                     alt="{{auth('user')->user()->email}}">
-                <span class="d-md-down-none">{{auth('user')->user()->name }}</span>
-            </template>
-            <template slot="header-user-dropdown-items">
-                <b-dropdown-header tag="div" class="text-center"><strong>حساب کاربری</strong></b-dropdown-header>
-                <b-dropdown-item><i class="fa fa-user"></i> پروفایل</b-dropdown-item>
-                {{--<b-dropdown-header tag="div" class="text-center"><strong>تنظیمات</strong></b-dropdown-header>--}}
-                <b-dropdown-divider></b-dropdown-divider>
-                <b-dropdown-item t><i class="icon-logout"></i> خروج</b-dropdown-item>
-            </template>
-            <template slot="container">
-                @yield('content')
-            </template>
-            <template slot="footer">
-                <div class="mr-auto ml-auto">
-                    <small class="text-secondary">طراحی و توسعه توسط <span class="">-</span></small>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header text-center p-0">
+                    <a class="navbar-brand" href="index.html">
+                        <b>
+                            {{--<img src="../images/logo-icon.jpg" alt="homepage" class="dark-logo"/>--}}
+                            {{--<img src="../images/logo-icon.jpg" alt="homepage" class="light-logo"/>--}}
+                        </b>
+                        <span>
+                            <img src="{{asset('storage/images/logo-icon.jpg')}}" alt="پنل کاربری" class="dark-logo"/>
+                            {{--<img src="../images/logo-icon.jpg" class="light-logo" alt="homepage"/>--}}
+                        </span>
+                    </a>
                 </div>
-            </template>
-        </user>
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i
+                                        class="fa fa-bars"></i></a></li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item hidden-xs-down search-box"><a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
+                                        class="fa fa-search"></i></a>
+                            <form class="app-search">
+                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="fa fa-times"></i></a></form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false"><img src="{{asset('storage/images/users/1.jpg')}}" alt="خوش آمدید" class=""/> <span
+                                        class="hidden-md-down">{{auth()->user()->name}} &nbsp;</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li><a class="waves-effect waves-dark" href="/" aria-expanded="false"><i class="fa fa-tachometer"></i><span
+                                        class="hide-menu">خانه</span></a>
+                        </li>
+                        <li><a class="waves-effect waves-dark" href="/user/task" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
+                                        class="hide-menu">وظایف</span></a>
+                        </li>
+
+                        <li><a class="waves-effect waves-dark btn btn-danger" href="/user/logout" aria-expanded="false"><i class="fa fa-sign-ou"></i><span
+                                        class="hide-menu"> خروج </span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-12 align-self-center">
+                        @yield('content')
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
-    <script>
-      window.Laravel = {csrfToken: '{{ csrf_token() }}'}
-    </script>
-    @yield('varJs')
-    <script src="{{asset('js/user.js')}}"></script>
+
 </body>
+
 </html>

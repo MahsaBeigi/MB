@@ -42,26 +42,16 @@
                             <div class="clearfix"></div>
                             <div role="group" class="form-row b-form-group form-group">
                                 {{--<div class="form-group col-sm-4 col-md-4 col-xs-12 clearfix" >--}}
-                                <label>نام و نام خانوادگی </label>
-                                <b-input type='text' id="t_name" name="first_name" class="form-control" placeholder="نام"
-                                         value="{{$response['user']->first_name}}"></b-input>
-                                <b-input type='text' name="last_name" class="form-control" placeholder="نام خانوادگی"
-                                         value="{{$response['user']->last_name}}"></b-input>
+                                <label>نام </label>
+                                <b-input type='text' id="t_name" name="name" class="form-control" placeholder="نام"
+                                         value="{{$response['user']->name}}"></b-input>
+
                             </div>
                             <div role="group" class="form-row b-form-group form-group">
-                                <label>کد ملی</label>
+                                <label>ایمیل</label>
                                 <b-input readonly="readonly" type='text' id="t_code" name="meli_code" class="form-control ltr number"
-                                         placeholder="کد ملی خود را وارد کنید"
-                                         value="{{$response['user']->meli_code}}"></b-input>
-                            </div>
-                            <div role="group" class="form-row b-form-group form-group">
-                                <label> شهر </label>
-                                <b-input type='text' id="t_email" name="city" class="form-control ltr" value="{{$response['user']->city}}"></b-input>
-                            </div>
-                            <div role="group" class="form-row b-form-group form-group">
-                                <label> آدرس </label>
-                                <b-textarea type='text' id="t_dad" name="address" class="form-control ltr number"
-                                >{{$response['user']->address }}</b-textarea>
+                                         placeholder="ایمیل"
+                                         value="{{$response['user']->mail}}"></b-input>
                             </div>
 
                             <div role="group" class="form-row b-form-group form-group">

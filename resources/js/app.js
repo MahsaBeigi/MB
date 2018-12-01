@@ -1,13 +1,13 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import swal from 'sweetalert2'
 
-require('./bootstrap');
+require('./bootstrap')
 
-window.Vue = require('vue');
+window.Vue = require('vue')
 
 /**
  * The following block of code may be used to automatically register your
@@ -17,7 +17,7 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
@@ -29,5 +29,46 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  */
 
 const app = new Vue({
-    el: '#app'
-});
+  el: '#app',
+  data: function () {
+    return {
+      phone: ''
+    }
+  }, methods: {
+    registerPhone (phone) {
+      axios.get('/user/register/' + phone)
+        .then((response) => {
+          if (response.data.status == 200) {
+            swal({
+              title: 'ارسال شد',
+              text: response.data['Message'],
+              type: 'success',
+              confirmButtonText: 'باشه',
+              customClass: 'iransans',
+            }).then(function () {
+              this.phone = phone
+            })
+          } else if (response.data.status != 200) {
+            swal({
+              title: 'خطا',
+              text: response.data['Message'],
+              type: 'error',
+              customClass: 'iransans',
+              confirmButtonText: 'باشه',
+            }).then(function () {
+              this.phone = phone
+            })
+          }
+        }).catch((error) => {
+        swal({
+          title: 'خطای سیستم',
+          text: '.عملیات با مشکل مواجه شد',
+          type: 'error',
+          customClass: 'iransans',
+          confirmButtonText: 'باشه',
+        })
+      })
+
+    },
+  }
+})

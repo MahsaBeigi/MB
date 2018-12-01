@@ -5,15 +5,33 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
+                    @if ($errors->any())
+                        <div class="error-notice text-right">
+                            <div class="oaerror danger w-100">
+                                <ul class="m-0 p-0 list-unstyled">
+                                    @foreach ($errors->all() as $error)
+                                        <li><strong>خطا</strong> - {{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="error-notice text-right">
+                            <div class="oaerror danger w-100">
+                                <strong>خطا</strong> - {{ session('error') }}
+                            </div>
+                        </div>
+                    @endif
+                    @if(Session::has('alert'))
 
+                        {{ Session::get('alert') }} @php Session::forget('alert'); @endphp
+
+                    @endif
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/register') }}">
                             {{ csrf_field() }}
-                            @if(Session::has('alert'))
 
-                                {{ Session::get('alert') }} @php Session::forget('alert'); @endphp
-
-                            @endif
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">نام</label>
 
@@ -23,6 +41,19 @@
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                <label for="phone" class="col-md-4 control-label">شماره همراه</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone" type="text" v-model=phone class="form-control" name="phone" value="{{ old('phone') }}" autofocus>
+
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -37,9 +68,11 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="input-group mb-4">
+                            <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
                                 <span class="input-group-addon red">*</span>
-                                <input type="text" name="code" class="form-control text-right iransans" placeholder="کد را وارد کنید">
+                                <div class="col-md-6">
+                                    <input type="text" name="code" class="form-control text-right iransans" placeholder="کد را وارد کنید">
+                                </div>
                             </div>
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">ایمیل</label>

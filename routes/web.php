@@ -20,7 +20,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.'], funct
     Route::get('/login', 'UserAuth\LoginController@showLoginForm')->name('login');
     Route::post('/login', 'UserAuth\LoginController@login');
     Route::get('/logout', 'UserAuth\LoginController@logout')->name('logout');
-
+    Route::get('/register/{phone}', 'UserAuth\RegisterController@sendRegisterCode');
+    Route::get('/phone:{phone}/verify:{code}', 'UserAuth\RegisterController@registerCodeVerify');
     Route::get('/register', 'UserAuth\RegisterController@showRegistrationForm')->name('register');
     Route::post('/register', 'UserAuth\RegisterController@register');
 

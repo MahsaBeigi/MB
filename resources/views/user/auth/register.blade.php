@@ -27,7 +27,20 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="row m-4">
+                                <div class="col-12 text-center">
 
+                                    <button type="button" class="btn btn-success"
+                                            @click="registerPhone(phone)">ارسال کد
+                                    </button>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="input-group mb-4">
+                                <span class="input-group-addon red">*</span>
+                                <input type="text" name="code" class="form-control text-right iransans" placeholder="کد را وارد کنید">
+                            </div>
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">ایمیل</label>
 
